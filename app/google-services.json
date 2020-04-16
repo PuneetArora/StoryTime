@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "302241213642",
+    "firebase_url": "https://storytime-c7c9e.firebaseio.com",
+    "project_id": "storytime-c7c9e",
+    "storage_bucket": "storytime-c7c9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:302241213642:android:e28be1726e205040aa1833",
+        "android_client_info": {
+          "package_name": "com.killer.storytime"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "302241213642-cn9jehrl3uv3a1f259qmf2id99mp3mep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCj5zcngwHyBiUTuvuoagyqFunfwMYU0HI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "302241213642-cn9jehrl3uv3a1f259qmf2id99mp3mep.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
