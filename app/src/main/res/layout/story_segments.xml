@@ -11,17 +11,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        android:layout_margin="5dp"
         android:background="#ffffff"
-
         >
 
         <ImageView
             android:id="@+id/story_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:contentDescription="@string/image_not_found"
             android:scaleType="centerCrop" />
 
         <TextView
@@ -32,7 +29,8 @@
             android:layout_centerInParent="true"
             android:alpha="0.8"
             android:background="#000000"
-            android:fontFamily="@font/pacifico"
+            android:fontFamily="casual"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             android:gravity="center"
 
             android:textColor="#ffffff"

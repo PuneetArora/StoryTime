@@ -1,15 +1,8 @@
 package com.killer.storytime;
 
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.IBinder;
-import android.os.PowerManager;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -31,53 +24,11 @@ public class FragmentAct extends AppCompatActivity implements NavigationView.OnN
     private Toolbar toolbar;
     private StoryFragment obj;
     private Boolean exit = false;
-    HomeWatcher mHomeWatcher;
-    int count = 2;
-    private boolean music = true;
-    //Bind/Unbind music service
-    private boolean mIsBound = false;
-    private MusicService mServ;
-    private ServiceConnection Scon = new ServiceConnection() {
-
-        public void onServiceConnected(ComponentName name, IBinder
-                binder) {
-            mServ = ((MusicService.ServiceBinder) binder).getService();
-        }
-
-        public void onServiceDisconnected(ComponentName name) {
-            mServ = null;
-        }
-    };
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_fragment);
         checkFirstRun();
-
-        //BIND Music Service
-        doBindService();
-        Intent music = new Intent();
-        music.setClass(this, MusicService.class);
-        startService(music);
-
-        //Start HomeWatcher
-        mHomeWatcher = new HomeWatcher(this);
-        mHomeWatcher.setOnHomePressedListener(new HomeWatcher.OnHomePressedListener() {
-            @Override
-            public void onHomePressed() {
-                if (mServ != null) {
-                    mServ.pauseMusic();
-                }
-            }
-
-            @Override
-            public void onHomeLongPressed() {
-                if (mServ != null) {
-                    mServ.pauseMusic();
-                }
-            }
-        });
 
 
         navigationView = findViewById(R.id.nav_view);
@@ -113,25 +64,25 @@ public class FragmentAct extends AppCompatActivity implements NavigationView.OnN
         }
     }
 
-    void doBindService() {
-        bindService(new Intent(this, MusicService.class),
-                Scon, Context.BIND_AUTO_CREATE);
-        mIsBound = true;
-    }
-
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         // set item as selected to persist highlight
-        menuItem.setChecked(false);
+
         int id = menuItem.getItemId();
         Intent intent = null;
         // Add code here to update the UI based on the item selected
         // For example, swap UI fragments here
 
-        if (id == R.id.select_language)
+        if (id == R.id.select_language) {
             intent = new Intent(this, SelectLanguage.class);
-        if (id == R.id.contact_us) {
+            menuItem.setChecked(false);
         }
+        if (id == R.id.contact_us) {
+            intent = new Intent(this, ContactActivity.class);
+            menuItem.setChecked(false);
+        }
+
+
         if (intent != null) {
             startActivity(intent);
         }
@@ -140,22 +91,12 @@ public class FragmentAct extends AppCompatActivity implements NavigationView.OnN
         return true;
     }
 
-    void doUnbindService() {
-        if (mIsBound) {
-            unbindService(Scon);
-            mIsBound = false;
-        }
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (t.onOptionsItemSelected(item))
             return true;
 
-        if (id == R.id.music_toggle) {
-
-        }
 
 
 
@@ -179,7 +120,7 @@ public class FragmentAct extends AppCompatActivity implements NavigationView.OnN
 
         }
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                .putBoolean("isFirstRun", false).commit();
+                .putBoolean("isFirstRun", false).apply();
 
     }
 
@@ -206,52 +147,5 @@ public class FragmentAct extends AppCompatActivity implements NavigationView.OnN
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (mServ != null) {
-            mServ.resumeMusic();
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        //Detect idle screen
-        PowerManager pm = (PowerManager)
-                getSystemService(Context.POWER_SERVICE);
-        boolean isScreenOn = false;
-        if (pm != null) {
-            isScreenOn = pm.isInteractive();
-        }
-
-        if (!isScreenOn) {
-            if (mServ != null) {
-                mServ.pauseMusic();
-            }
-        }
-    }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        //UNBIND music service
-        doUnbindService();
-        Intent music = new Intent();
-        music.setClass(this, MusicService.class);
-        stopService(music);
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.app_bar, menu);
-        return true;
-    }
 }
 

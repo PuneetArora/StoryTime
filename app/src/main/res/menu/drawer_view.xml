@@ -5,15 +5,12 @@
         <item
             android:id="@+id/contact_us"
             android:icon="@android:drawable/ic_dialog_email"
-            android:title="Contact Us" />
-        <item
-            android:id="@+id/favorites"
-            android:icon="@drawable/ic_favorite_black_24dp"
-            android:title="Favorites" />
+            android:title="@string/contact_us" />
+
         <item
             android:id="@+id/select_language"
             android:icon="@drawable/ic_language_black_24dp"
-            android:title="Change language" />
+            android:title="@string/change_language" />
 
 
     </group>
