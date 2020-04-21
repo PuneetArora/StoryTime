@@ -61,6 +61,7 @@ public class StoryFragment extends Fragment {
 
         RecyclerView storyRecycler = (RecyclerView) inflater.inflate(R.layout.fragment_story, container, false);
 
+
         if (!(isNetworkConnected() && isOnline()))
             Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
 

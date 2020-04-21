@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:fontFamily="casual"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
                 android:textStyle="bold"
@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:fontFamily="casual"
+                android:fontFamily="sans-serif"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -44,15 +44,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:fontFamily="casual"
-                android:textSize="24sp"
                 android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
 
-
         </LinearLayout>
+
     </androidx.core.widget.NestedScrollView>
+
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -84,5 +85,6 @@
                 app:layout_collapseMode="pin" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

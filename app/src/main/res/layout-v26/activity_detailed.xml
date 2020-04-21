@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:fontFamily="casual"
+                android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
                 android:textStyle="bold"
@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:fontFamily="casual"
+                android:fontFamily="sans-serif"
                 android:justificationMode="inter_word"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="20dp"
-                android:fontFamily="casual"
+                android:fontFamily="sans-serif"
                 android:justificationMode="inter_word"
                 android:textSize="24sp"
                 android:textStyle="bold" />

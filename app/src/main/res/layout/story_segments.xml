@@ -29,9 +29,9 @@
             android:layout_centerInParent="true"
             android:alpha="0.8"
             android:background="#000000"
-            android:fontFamily="casual"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:fontFamily="sans-serif"
             android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
 
             android:textColor="#ffffff"
             android:textSize="20sp" />
