@@ -1,6 +1,6 @@
 package com.killer.storytime;
 
-public class StoryData {
+class StoryData {
     private String imageUrl, moral, story, title;
 
     public StoryData(String imageUrl, String moral, String story, String title) {

@@ -16,13 +16,10 @@ import com.google.android.material.navigation.NavigationView;
 
 public class FragmentAct extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static final String EXTRA_LANGUAGE = "english";
-    NavigationView navigationView;
+    private NavigationView navigationView;
     private ActionBarDrawerToggle t;
     private DrawerLayout drawerLayout;
     private String language;
-    private Bundle bundle;
-    private Toolbar toolbar;
-    private StoryFragment obj;
     private Boolean exit = false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +30,7 @@ public class FragmentAct extends AppCompatActivity implements NavigationView.OnN
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -49,7 +46,7 @@ public class FragmentAct extends AppCompatActivity implements NavigationView.OnN
 
 
             language = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("shared_language", "english");
-            bundle = new Bundle();
+            Bundle bundle = new Bundle();
             bundle.putString("lang", language);
             if (language.equals("hindi"))
                 getSupportActionBar().setTitle("हिंदी कहानियाँ");
@@ -57,7 +54,7 @@ public class FragmentAct extends AppCompatActivity implements NavigationView.OnN
                 getSupportActionBar().setTitle("ਪੰਜਾਬੀ ਕਹਾਣੀਆਂ");
             else
                 getSupportActionBar().setTitle("English Stories");
-            obj = new StoryFragment();
+            StoryFragment obj = new StoryFragment();
             obj.setArguments(bundle);
             obj.setRetainInstance(true);
             getSupportFragmentManager().beginTransaction().add(R.id.content_frame, obj).commit();
@@ -67,7 +64,7 @@ public class FragmentAct extends AppCompatActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         // set item as selected to persist highlight
-
+        menuItem.setChecked(false);
         int id = menuItem.getItemId();
         Intent intent = null;
         // Add code here to update the UI based on the item selected
@@ -81,12 +78,24 @@ public class FragmentAct extends AppCompatActivity implements NavigationView.OnN
             intent = new Intent(this, ContactActivity.class);
             menuItem.setChecked(false);
         }
-
+        if (id == R.id.share_button) {
+            try {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "My application name");
+                String shareMessage = "\nLet me recommend you StoryTime app containing English, Hindi and Punjabi Stories for Kids\n\n";
+                shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n";
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                startActivity(Intent.createChooser(shareIntent, "choose one"));
+            } catch (Exception e) {
+                //e.toString();
+            }
+        }
 
         if (intent != null) {
             startActivity(intent);
         }
-
+        menuItem.setChecked(false);
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -104,8 +113,8 @@ public class FragmentAct extends AppCompatActivity implements NavigationView.OnN
     }
 
 
-    public void checkFirstRun() {
-        Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+    private void checkFirstRun() {
+        boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
 
         if (isFirstRun) {

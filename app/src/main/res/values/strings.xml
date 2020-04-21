@@ -8,8 +8,12 @@
     <string name="contact_us">Contact Us</string>
     <string name="change_language">Change language</string>
     <string name="my_email">For any Complaints, Queries and Suggestions Please e-mail us at:</string>
-    <string name="_698puneet_gmail_com">my_email_value</string>
+    <string name="_698puneet_gmail_com">698puneet@gmail.com</string>
     <string name="image_not_found">No Image Found</string>
     <string name="news_image_not_found">Image unavailable</string>
+    <string name="english">English</string>
+    <string name="hindi">हिंदी </string>
+    <string name="punjabi">ਪੰਜਾਬੀ</string>
+    <string name="share_app">Share App</string>
 
 </resources>

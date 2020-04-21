@@ -5,7 +5,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
-    public CardView ncardView;
+    public final CardView ncardView;
 
     public ViewHolder(CardView v) {
         super(v);

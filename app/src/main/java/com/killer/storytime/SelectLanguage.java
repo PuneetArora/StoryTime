@@ -13,7 +13,7 @@ import static com.killer.storytime.FragmentAct.EXTRA_LANGUAGE;
 
 public class SelectLanguage extends AppCompatActivity {
 
-    Intent intent;
+    private Intent intent;
     private Boolean exit = false;
     private long mLastClickTime = 0;
     private String language;
@@ -41,7 +41,7 @@ public class SelectLanguage extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 setLanguage("english");
                 getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                        .putString("shared_language", getLanguage()).commit();
+                        .putString("shared_language", getLanguage()).apply();
                 intent.putExtra(EXTRA_LANGUAGE, getLanguage());
                 startActivity(intent);
             }
@@ -62,7 +62,7 @@ public class SelectLanguage extends AppCompatActivity {
                 setLanguage("hindi");
 
                 getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                        .putString("shared_language", getLanguage()).commit();
+                        .putString("shared_language", getLanguage()).apply();
                 intent.putExtra(EXTRA_LANGUAGE, getLanguage());
                 startActivity(intent);
             }
@@ -83,7 +83,7 @@ public class SelectLanguage extends AppCompatActivity {
                 setLanguage("punjabi");
 
                 getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                        .putString("shared_language", getLanguage()).commit();
+                        .putString("shared_language", getLanguage()).apply();
 
                 intent.putExtra(EXTRA_LANGUAGE, getLanguage());
                 startActivity(intent);
@@ -95,11 +95,11 @@ public class SelectLanguage extends AppCompatActivity {
     }
 
 
-    public String getLanguage() {
+    private String getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language) {
+    private void setLanguage(String language) {
         this.language = language;
     }
 

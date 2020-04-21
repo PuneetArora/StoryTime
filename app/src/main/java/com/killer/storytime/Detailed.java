@@ -12,6 +12,9 @@ import com.squareup.picasso.Picasso;
 
 public class Detailed extends AppCompatActivity {
     public static final String EXTRA_PHOTOURL = "newsId", EXTRA_STORY_HEADING = "heading", EXTRA_STORY = "STORY", EXTRA_MORAL = "MORAL";
+    private String photoURL, story, heading, moral;
+    private ImageView imageView;
+    private TextView textViewHeading, textViewstory, textViewmoral;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,26 +22,26 @@ public class Detailed extends AppCompatActivity {
         setContentView(R.layout.activity_detailed);
 
 
-        String photoURL = (String) getIntent().getExtras().get(EXTRA_PHOTOURL);
-        ImageView imageView = findViewById(R.id.storyDetailImageView);
+        photoURL = (String) getIntent().getExtras().get(EXTRA_PHOTOURL);
+        imageView = findViewById(R.id.storyDetailImageView);
         Picasso.get().load(photoURL).into(imageView);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        TextView textViewHeading = findViewById(R.id.heading_news);
-        TextView textViewstory = findViewById(R.id.story);
-        TextView textViewmoral = findViewById(R.id.moral);
+        textViewHeading = findViewById(R.id.heading_news);
+        textViewstory = findViewById(R.id.story);
+        textViewmoral = findViewById(R.id.moral);
 
 
-        String story = (String) getIntent().getExtras().get(EXTRA_STORY);
+        story = (String) getIntent().getExtras().get(EXTRA_STORY);
         textViewstory.setText(story);
-        String heading = (String) getIntent().getExtras().get(EXTRA_STORY_HEADING);
+        heading = (String) getIntent().getExtras().get(EXTRA_STORY_HEADING);
         textViewHeading.setText(heading);
         getSupportActionBar().setTitle(heading);
 
-        String moral = (String) getIntent().getExtras().get(EXTRA_MORAL);
+        moral = (String) getIntent().getExtras().get(EXTRA_MORAL);
         textViewmoral.setText(moral);
 
 

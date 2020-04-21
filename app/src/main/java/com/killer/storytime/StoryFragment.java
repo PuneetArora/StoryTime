@@ -37,12 +37,9 @@ public class StoryFragment extends Fragment {
     private long mLastClickTime = 0;
     private FirebaseRecyclerAdapter adapter;
     private String language;
-    private LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-    private RecyclerView storyRecycler;
-    private Query query;
+    private final LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
     private ImageView imageView;
     private TextView title;
-    private Bundle bundle;
     private CardView ncv;
 
 
@@ -62,18 +59,18 @@ public class StoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        storyRecycler = (RecyclerView) inflater.inflate(R.layout.fragment_story, container, false);
+        RecyclerView storyRecycler = (RecyclerView) inflater.inflate(R.layout.fragment_story, container, false);
 
         if (!(isNetworkConnected() && isOnline()))
             Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
 
 
-        bundle = getArguments();
+        Bundle bundle = getArguments();
         if (bundle != null) {
             language = bundle.getString("lang");
         }
 
-        query = FirebaseDatabase.getInstance()
+        Query query = FirebaseDatabase.getInstance()
                 .getReference()
                 .child(language);
 
@@ -177,7 +174,7 @@ public class StoryFragment extends Fragment {
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 
-    public boolean isOnline() {
+    private boolean isOnline() {
         Runtime runtime = Runtime.getRuntime();
         try {
             Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
