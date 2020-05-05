@@ -2,6 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
 
+
         <item
             android:id="@+id/contact_us"
             android:icon="@android:drawable/ic_dialog_email"
@@ -16,6 +17,12 @@
             android:id="@+id/share_button"
             android:icon="@drawable/ic_share"
             android:title="@string/share_app" />
+
+
+        <item
+            android:id="@+id/more_button"
+            android:icon="@drawable/ic_add_black_24dp"
+            android:title="@string/more_apps" />
 
 
     </group>

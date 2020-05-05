@@ -9,7 +9,7 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <LinearLayout
@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
 
             <TextView
                 android:id="@+id/heading_news"
@@ -29,6 +30,7 @@
                 android:textStyle="bold"
 
                 />
+
 
             <TextView
                 android:id="@+id/story"
@@ -74,7 +76,6 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/news_image_not_found"
                 android:scaleType="centerCrop"
-                android:src="@drawable/welcomebg"
                 app:layout_collapseMode="parallax" />
 
 

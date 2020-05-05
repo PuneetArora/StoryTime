@@ -41,8 +41,6 @@ public class StoryFragment extends Fragment {
     private ImageView imageView;
     private TextView title;
     private CardView ncv;
-
-
     public StoryFragment() {
         // Required empty public constructor
     }
@@ -59,9 +57,9 @@ public class StoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        RecyclerView storyRecycler = (RecyclerView) inflater.inflate(R.layout.fragment_story, container, false);
+        final RecyclerView storyRecycler = (RecyclerView) inflater.inflate(R.layout.fragment_story, container, false);
 
-
+        storyRecycler.setHasFixedSize(true);
         if (!(isNetworkConnected() && isOnline()))
             Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
 
@@ -76,16 +74,16 @@ public class StoryFragment extends Fragment {
                 .child(language);
 
 
-        FirebaseRecyclerOptions<StoryData> options =
+        final FirebaseRecyclerOptions<StoryData> options =
                 new FirebaseRecyclerOptions.Builder<StoryData>()
                         .setQuery(query, StoryData.class)
                         .build();
 
+
         adapter = new FirebaseRecyclerAdapter<StoryData, ViewHolder>(options) {
             @Override
             public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                // Create a new instance of the ViewHolder, in this case we are using a custom
-                // layout called R.layout.message for each item
+
                 ncv = (CardView) LayoutInflater
                         .from(parent.getContext())
                         .inflate(R.layout.story_segments, parent, false);
@@ -135,28 +133,6 @@ public class StoryFragment extends Fragment {
         return storyRecycler;
     }
 
-/*    @Override
-    public void onResume() {
-        super.onResume();
-
-            adapter.startListening();
-
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if( adapter != null) {
-            adapter.stopListening();
-        }
-    }*/
-/*
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        adapter.startListening();
-    }*/
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -183,12 +159,14 @@ public class StoryFragment extends Fragment {
             return (exitValue == 0);
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (InterruptedException d) {
+            d.printStackTrace();
         }
 
         return false;
+
     }
+
 }
 
 

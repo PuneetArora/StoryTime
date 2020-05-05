@@ -1,6 +1,7 @@
 package com.killer.storytime;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -26,11 +27,13 @@ public class FragmentAct extends AppCompatActivity implements NavigationView.OnN
     private DrawerLayout drawerLayout;
     private String language;
     private Boolean exit = false;
-    private AdView mAdView;
+    private AdView mAdView, mAdView2;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_fragment);
+
+        checkFirstRun();
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -43,7 +46,6 @@ public class FragmentAct extends AppCompatActivity implements NavigationView.OnN
         mAdView.loadAd(adRequest);
 
 
-        checkFirstRun();
 
 
         navigationView = findViewById(R.id.nav_view);
@@ -59,10 +61,7 @@ public class FragmentAct extends AppCompatActivity implements NavigationView.OnN
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
 
 
-
         if (savedInstanceState == null) {
-
-
             language = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("shared_language", "english");
             Bundle bundle = new Bundle();
             bundle.putString("lang", language);
@@ -79,6 +78,7 @@ public class FragmentAct extends AppCompatActivity implements NavigationView.OnN
         }
     }
 
+
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         // set item as selected to persist highlight
@@ -91,12 +91,10 @@ public class FragmentAct extends AppCompatActivity implements NavigationView.OnN
         if (id == R.id.select_language) {
             intent = new Intent(this, SelectLanguage.class);
             menuItem.setChecked(false);
-        }
-        if (id == R.id.contact_us) {
+        } else if (id == R.id.contact_us) {
             intent = new Intent(this, ContactActivity.class);
             menuItem.setChecked(false);
-        }
-        if (id == R.id.share_button) {
+        } else if (id == R.id.share_button) {
             try {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
@@ -108,6 +106,15 @@ public class FragmentAct extends AppCompatActivity implements NavigationView.OnN
             } catch (Exception e) {
                 //e.toString();
             }
+        } else if (id == R.id.more_button) {
+            try {
+                //replace &quot;Unified+Apps&quot; with your developer name
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:Killer+Studios")));
+            } catch (android.content.ActivityNotFoundException anfe) {
+                //replace &quot;Unified+Apps&quot; with your developer name
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/search?q=pub:Killer+Studios")));
+            }
+
         }
 
         if (intent != null) {
@@ -174,5 +181,12 @@ public class FragmentAct extends AppCompatActivity implements NavigationView.OnN
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+    }
 }
 
